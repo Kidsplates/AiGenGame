@@ -247,6 +247,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { once: true });
 
+  // スマホ用地図ズーム切り替えボタン
+  const btnZoomToggle = document.getElementById('btn-zoom-toggle');
+  const mapSection = document.getElementById('map-section');
+  if (btnZoomToggle && mapSection) {
+    btnZoomToggle.addEventListener('click', () => {
+      playTap();
+      const isZoomed = mapSection.classList.toggle('zoomed');
+      btnZoomToggle.innerText = isZoomed ? '🔍⁻' : '🔍⁺';
+    });
+  }
+
   // --- フローティングUIのドラッグ移動機能 ---
   setupDraggableUI();
 
