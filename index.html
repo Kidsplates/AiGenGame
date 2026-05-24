@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<!--
+  Copyright (c) 2026 Kidsplates/UsenVideoCallApp
+  Created: 2026-05-24
+  Description: 「日本ちずマスター」メインHTML構造
+-->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日本ちずマスター | 楽しく覚える日本地図クイズ＆パズル</title>
+  <meta name="description" content="パズルとクイズで日本全国の都道府県や地名を楽しく学べる、こども向けの知育ゲームです。日本地図の図鑑モードもあります。">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- ヘッダー -->
+    <header>
+      <div class="logo-container" id="btn-home-logo">
+        <span class="logo-icon">🗺️</span>
+        <h1>日本ちずマスター</h1>
+      </div>
+      <div class="controls-header">
+        <button class="wood-btn small" id="btn-settings-open">
+          ⚙️ <span>せってい</span>
+        </button>
+        <button class="wood-btn small secondary" id="btn-back-home" style="display: none;">
+          🏠 <span>もどる</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- 1. タイトル画面 -->
+      <section id="title-screen" class="screen active">
+        <div class="title-card">
+          <div class="title-text-group">
+            <p class="title-sub">たのしくおぼえよう！</p>
+            <h2 class="title-main">日本ちずマスター</h2>
+          </div>
+          <!-- メインイラスト (プレースホルダーを置かず、画像生成でアセットを用意する) -->
+          <img id="title-illustration" class="main-logo-image" src="assets/images/title_character.png" alt="日本ちずマスター">
+          <div class="menu-list">
+            <button class="wood-btn primary" id="btn-start-quiz">
+              <span class="btn-icon">❓</span> ちずクイズ
+            </button>
+            <button class="wood-btn secondary" id="btn-start-puzzle">
+              <span class="btn-icon">🧩</span> ちずパズル
+            </button>
+            <button class="wood-btn accent" id="btn-start-encyclopedia">
+              <span class="btn-icon">📖</span> 都府県ずかん
+            </button>
+            <button class="wood-btn small" id="btn-open-mistakes" style="margin-top: 10px; background: #e2d3bb; font-size: 0.95rem; justify-content: center;">
+              <span class="btn-icon">📝</span> にがてリスト
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ゲーム画面 (クイズ、パズル、図鑑で共通レイアウト) -->
+      <section id="game-screen" class="screen">
+        <div class="game-layout">
+          <!-- 左側: 日本地図エリア -->
+          <div class="map-section" id="map-section">
+            <div class="map-container" id="map-container">
+              <!-- JavaScriptで動的にSVGマップが読み込まれ展開されます -->
+            </div>
+          </div>
+          
+          <!-- 右側: 操作・情報パネル -->
+          <div class="control-section" id="floating-control-section">
+            <div class="info-panel" id="info-panel">
+              <!-- クイズモード用表示 -->
+              <div id="quiz-ui" style="display: none;">
+                <div class="panel-title">
+                  <span>❓</span> <span id="quiz-title-text">ちずクイズ</span>
+                </div>
+                <div class="game-progress">
+                  <span id="quiz-progress-text">だい 1/10 もん</span>
+                  <span id="quiz-score-text">せいかい: 0</span>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar-fill" id="quiz-progress-bar"></div>
+                </div>
+                <div class="quiz-question-box">
+                  <h3 id="quiz-question-text">光っている都道府県の名前はなーんだ？</h3>
+                  <p class="quiz-hint" id="quiz-hint-text">ヒント: 東北地方にあるよ！</p>
+                </div>
+                <div class="options-grid" id="quiz-options-container">
+                  <button class="wood-btn option-btn">選択肢1</button>
+                  <button class="wood-btn option-btn">選択肢2</button>
+                  <button class="wood-btn option-btn">選択肢3</button>
+                  <button class="wood-btn option-btn">選択肢4</button>
+                </div>
+              </div>
+
+              <!-- パズルモード用表示 -->
+              <div id="puzzle-ui" style="display: none;">
+                <div class="panel-title">
+                  <span>🧩</span> <span>ちずパズル</span>
+                </div>
+                <div class="game-progress">
+                  <span id="puzzle-progress-text">はまったピース: 0/47</span>
+                </div>
+                <p style="margin-bottom: 12px; font-weight: bold; font-size: 0.9rem;">
+                  下のピースをドラッグして、地図の正しい位置にはめてね！
+                </p>
+                <!-- 地方切り替えタブ -->
+                <div class="region-select-grid" id="puzzle-region-selector">
+                  <!-- JSでボタンが生成されます -->
+                </div>
+                <!-- ピーストレイ -->
+                <div class="puzzle-tray" id="puzzle-tray">
+                  <!-- ドラッグ可能なピースが動的に追加されます -->
+                </div>
+              </div>
+
+              <!-- 図鑑モード用表示 -->
+              <div id="encyclopedia-ui" style="display: none;">
+                <div class="panel-title">
+                  <span>📖</span> <span>都府県ずかん</span>
+                </div>
+                <!-- 未選択状態のプレースホルダー -->
+                <div id="encyclopedia-placeholder" class="encyclopedia-placeholder">
+                  <span class="icon">🔍</span>
+                  <p>地図の都道府県をタップすると、<br>くわしい情報（じょうほう）が表示されるよ！</p>
+                </div>
+                <!-- 詳細カード -->
+                <div id="encyclopedia-details" class="detail-card" style="display: none;">
+                  <div class="detail-header">
+                    <div class="detail-name-group">
+                      <span class="detail-kana" id="detail-kana">ほっかいどう</span>
+                      <h3 class="detail-name" id="detail-name">北海道</h3>
+                    </div>
+                    <span class="detail-region-badge" id="detail-region">北海道地方</span>
+                  </div>
+                  
+                  <div class="detail-row">
+                    <div class="detail-label">けんちょうしょざいち</div>
+                    <div class="detail-val" id="detail-capital">札幌（さっぽろ）</div>
+                  </div>
+
+                  <div class="detail-row">
+                    <div class="detail-label">めいさんひん（たべもの）</div>
+                    <div class="detail-val" id="detail-food">夕張メロン、カニ</div>
+                  </div>
+
+                  <div class="detail-row">
+                    <div class="detail-label">おすすめスポット</div>
+                    <div class="detail-val" id="detail-spot">札幌雪まつり</div>
+                  </div>
+
+                  <div class="detail-row">
+                    <div class="detail-label">豆知識（まめちしき）</div>
+                    <div class="detail-val" id="detail-trivia">日本で一番広い都道府県だよ！</div>
+                  </div>
+
+                  <img id="detail-illustration" class="detail-illustration" src="" alt="名産品イラスト">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- クイズ問題数選択モーダル -->
+    <div class="modal-overlay" id="modal-quiz-start">
+      <div class="modal-content">
+        <h3 class="modal-title">❓ クイズのもんだいすう</h3>
+        <p style="text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--text-main);">なん問クイズにチャレンジする？</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+          <button class="wood-btn primary btn-quiz-count" data-count="10">🔟 10もん</button>
+          <button class="wood-btn secondary btn-quiz-count" data-count="20">2️⃣0️⃣ 20もん</button>
+          <button class="wood-btn accent btn-quiz-count" data-count="30">3️⃣0️⃣ 30もん</button>
+          <button class="wood-btn btn-quiz-count" data-count="all" style="background: #a8e6cf; color: var(--text-main);">🗺️ ぜんぶ（47もん）</button>
+        </div>
+        <button class="wood-btn small secondary" id="btn-quiz-start-cancel" style="margin: 15px auto 0 auto; width: 120px; justify-content: center;">やめる</button>
+      </div>
+    </div>
+
+    <!-- 設定モーダル -->
+    <div class="modal-overlay" id="modal-settings">
+      <div class="modal-content">
+        <h3 class="modal-title">⚙️ せってい</h3>
+        <div class="modal-body">
+          <div class="setting-row">
+            <span>🔊 おと（効果音）</span>
+            <label class="switch">
+              <input type="checkbox" id="setting-sound" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <span>🔤 よみがな表記</span>
+            <label class="switch">
+              <input type="checkbox" id="setting-hiragana">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+        <button class="wood-btn primary" id="btn-settings-close" style="margin: 0 auto;">OK</button>
+      </div>
+    </div>
+
+    <!-- クイズ結果モーダル -->
+    <div class="modal-overlay" id="modal-result">
+      <div class="modal-content">
+        <h3 class="modal-title" id="result-title">🎉 おめでとう！</h3>
+        <div class="modal-body">
+          <p id="result-text">10問中 8問 正解したよ！</p>
+          <div class="modal-medal" id="result-medal">🥇</div>
+          <p id="result-message" style="font-weight: bold; margin-top: 10px;">すばらしい！きみは地図マスターだね！</p>
+        </div>
+        <button class="wood-btn primary" id="btn-result-close" style="margin: 0 auto;">もういっかい遊ぶ</button>
+      </div>
+    </div>
+
+    <!-- 苦手リストモーダル -->
+    <div class="modal-overlay" id="modal-mistakes">
+      <div class="modal-content" style="max-width: 600px;">
+        <h3 class="modal-title">📝 にがてリスト</h3>
+        <p style="color: var(--text-light); font-weight: bold; margin-bottom: 15px; font-size: 0.95rem;">
+          クイズやパズルで まちがえた都道府県だよ。しっかり復習（ふくしゅう）しよう！
+        </p>
+        <div class="modal-body" style="max-height: 300px; overflow-y: auto; text-align: left; padding: 5px;">
+          <div id="mistakes-list-container" style="display: flex; flex-direction: column; gap: 10px;">
+            <!-- JSで動的に苦手都道府県リストが作成されます -->
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; justify-content: center; margin-top: 20px;">
+          <button class="wood-btn small secondary" id="btn-clear-mistakes">🗑️ リセット</button>
+          <button class="wood-btn primary small" id="btn-mistakes-close">とじる</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スクリプトのインポート -->
+  <script src="js/mapData.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
