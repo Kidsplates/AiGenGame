@@ -852,15 +852,43 @@ input:checked + .slider:before {
   .info-panel {
     border: none !important;
     border-radius: 0 !important;
-    padding: 15px 20px 25px 20px !important;
+    padding: 8px 12px 15px 12px !important; /* パディングを極限まで削減 */
     min-height: 100%;
   }
   
   .panel-title {
     cursor: default !important; /* スマホではドラッグ不可にする */
-    margin-bottom: 10px !important;
-    font-size: 1.15rem !important;
-    padding-bottom: 6px !important;
+    margin-bottom: 6px !important;
+    font-size: 0.95rem !important; /* 文字サイズ縮小 */
+    padding-bottom: 4px !important;
+  }
+
+  /* クイズ・問題ボックスの縮小 */
+  .quiz-question-box {
+    padding: 6px 10px !important;
+    margin-bottom: 8px !important;
+    border-width: 2px !important;
+  }
+  
+  .quiz-question-box h3 {
+    font-size: 0.9rem !important;
+    margin-bottom: 2px !important;
+  }
+  
+  .quiz-hint {
+    font-size: 0.75rem !important;
+  }
+
+  /* クイズ進捗バーの縮小 */
+  .game-progress {
+    margin-bottom: 4px !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .progress-bar-container {
+    height: 6px !important;
+    margin-bottom: 8px !important;
+    border-width: 1.5px !important;
   }
 
   .options-grid {
