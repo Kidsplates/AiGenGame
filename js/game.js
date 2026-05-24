@@ -360,7 +360,7 @@ function startQuizMode(maxQuestionsCount) {
   const prefGroups = document.querySelectorAll('#map-container g.prefecture');
   const layer = getLabelsLayer();
   prefGroups.forEach(group => {
-    group.className.baseVal = `${group.className.baseVal.split(' ')[0]} prefecture`; // 状態クラスのクリア
+    group.classList.remove('highlight', 'highlight-error', 'completed', 'pref-slot');
     const prefId = group.id.replace('map-pref-', '');
     if (layer) {
       const text = layer.querySelector(`.pref-label-${prefId}`);
@@ -400,7 +400,7 @@ function nextQuizQuestion() {
   // 地図のハイライト表示切り替え
   const prefGroups = document.querySelectorAll('#map-container g.prefecture');
   prefGroups.forEach(group => {
-    group.classList.remove('highlight');
+    group.classList.remove('highlight', 'highlight-error');
     const prefId = group.id.replace('map-pref-', '');
     const prefData = prefectures.find(p => p.id === prefId);
     updateBlockTextVisibility(group, prefData);

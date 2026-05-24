@@ -791,7 +791,7 @@ input:checked + .slider:before {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding-bottom: 42vh; /* 下部パネルの高さ分だけ地図の下部に余白を空ける */
+    padding-bottom: 48vh; /* 下部パネルの高さ分だけ地図の下部に余白を空ける */
   }
   
   /* スマホでの通常時の地図サイズ：画面幅にすっぽり収める */
@@ -837,8 +837,8 @@ input:checked + .slider:before {
     right: auto !important;
     width: 100% !important;
     max-width: 100% !important;
-    height: 38vh !important; /* 画面下部38%に収める */
-    max-height: 38vh !important;
+    height: 44vh !important; /* 画面下部44%に拡張 */
+    max-height: 44vh !important;
     box-shadow: 0 -8px 25px rgba(93, 64, 55, 0.2) !important;
     margin-top: 0 !important;
     z-index: 90 !important;
@@ -852,65 +852,69 @@ input:checked + .slider:before {
   .info-panel {
     border: none !important;
     border-radius: 0 !important;
-    padding: 8px 12px 15px 12px !important; /* パディングを極限まで削減 */
+    padding: 6px 12px 10px 12px !important; /* パディングを極限まで削減 */
     min-height: 100%;
   }
   
   .panel-title {
     cursor: default !important; /* スマホではドラッグ不可にする */
-    margin-bottom: 6px !important;
-    font-size: 0.95rem !important; /* 文字サイズ縮小 */
+    margin-bottom: 4px !important;
+    font-size: 0.9rem !important; /* 文字サイズ縮小 */
     padding-bottom: 4px !important;
   }
 
   /* クイズ・問題ボックスの縮小 */
   .quiz-question-box {
-    padding: 6px 10px !important;
-    margin-bottom: 8px !important;
+    padding: 4px 8px !important;
+    margin-bottom: 4px !important;
     border-width: 2px !important;
   }
   
   .quiz-question-box h3 {
-    font-size: 0.9rem !important;
-    margin-bottom: 2px !important;
+    font-size: 0.85rem !important;
+    margin-bottom: 1px !important;
   }
   
   .quiz-hint {
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
   }
 
   /* クイズ進捗バーの縮小 */
   .game-progress {
-    margin-bottom: 4px !important;
-    font-size: 0.8rem !important;
+    margin-bottom: 2px !important;
+    font-size: 0.75rem !important;
   }
   
   .progress-bar-container {
-    height: 6px !important;
-    margin-bottom: 8px !important;
-    border-width: 1.5px !important;
+    height: 5px !important;
+    margin-bottom: 4px !important;
+    border-width: 1px !important;
   }
 
   .options-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 6px;
   }
   
   .option-btn {
-    font-size: 1rem;
-    padding: 10px;
+    font-size: 0.8rem !important; /* ボタン内テキスト縮小 */
+    padding: 6px !important;
+    border-width: 2px !important;
+    border-radius: 10px !important;
   }
 
   /* パズルピースのトレイの高さを制限 */
   .puzzle-tray {
-    max-height: 120px !important;
-    padding: 8px !important;
-    gap: 8px !important;
+    max-height: 90px !important; /* トレイの最大高さを削減 */
+    padding: 4px !important;
+    gap: 4px !important;
   }
   
   .puzzle-piece {
-    padding: 6px 10px !important;
-    font-size: 0.9rem !important;
+    padding: 4px 6px !important;
+    font-size: 0.8rem !important;
+    border-width: 2px !important;
+    border-radius: 8px !important;
   }
 
   /* 図鑑のイラストとレイアウトの調整（高さを抑えてスクロール不要にする） */
@@ -918,19 +922,55 @@ input:checked + .slider:before {
     flex-direction: row !important;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px !important;
+    gap: 4px !important;
   }
   
+  .detail-header {
+    width: 100%;
+    margin-bottom: 0 !important;
+  }
+
   .detail-illustration {
-    max-width: 80px !important;
-    height: 80px !important;
+    max-width: 50px !important; /* イラストの縮小 */
+    height: 50px !important;
     margin-top: 0 !important;
+    border-width: 2px !important;
+    border-radius: 8px !important;
   }
   
+  .detail-name-group {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .detail-name {
+    font-size: 1.1rem !important; /* 県名テキスト縮小 */
+  }
+  
+  .detail-kana {
+    font-size: 0.7rem !important; /* フリガナテキスト縮小 */
+  }
+  
+  .detail-region-badge {
+    padding: 2px 6px !important;
+    font-size: 0.65rem !important;
+  }
+
   .detail-row {
     flex: 1;
-    min-width: 120px;
-    padding: 8px !important;
+    min-width: 80px;
+    padding: 3px 6px !important; /* 詳細情報マージン削減 */
+    border-radius: 8px !important;
+  }
+  
+  .detail-label {
+    font-size: 0.6rem !important;
+    margin-bottom: 1px !important;
+  }
+  
+  .detail-val {
+    font-size: 0.75rem !important;
   }
 }
 
