@@ -784,12 +784,14 @@ input:checked + .slider:before {
 @media (max-width: 900px) {
   #app-container {
     padding: 10px;
+    padding-bottom: 80px; /* 全体の下部余白 */
   }
   
   .game-layout {
     flex-direction: column;
     align-items: center;
     width: 100%;
+    padding-bottom: 42vh; /* 下部パネルの高さ分だけ地図の下部に余白を空ける */
   }
   
   /* スマホでの通常時の地図サイズ：画面幅にすっぽり収める */
@@ -826,21 +828,39 @@ input:checked + .slider:before {
     display: flex !important;
   }
   
+  /* コントロールパネルを画面下部に固定して追従させる */
   .control-section {
-    position: relative !important;
-    top: 0 !important;
-    right: 0 !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    top: auto !important;
+    right: auto !important;
     width: 100% !important;
-    max-width: 500px !important;
-    max-height: none !important;
-    box-shadow: none !important;
-    margin-top: 20px;
-    z-index: 1;
+    max-width: 100% !important;
+    height: 38vh !important; /* 画面下部38%に収める */
+    max-height: 38vh !important;
+    box-shadow: 0 -8px 25px rgba(93, 64, 55, 0.2) !important;
+    margin-top: 0 !important;
+    z-index: 90 !important;
     transform: none !important; /* ドラッグ移動のリセット */
+    border-radius: 28px 28px 0 0 !important; /* 上の角だけ丸める */
+    border: none !important;
+    border-top: 8px solid var(--board-border) !important;
+    overflow-y: auto !important;
+  }
+  
+  .info-panel {
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 15px 20px 25px 20px !important;
+    min-height: 100%;
   }
   
   .panel-title {
     cursor: default !important; /* スマホではドラッグ不可にする */
+    margin-bottom: 10px !important;
+    font-size: 1.15rem !important;
+    padding-bottom: 6px !important;
   }
 
   .options-grid {
@@ -851,6 +871,38 @@ input:checked + .slider:before {
   .option-btn {
     font-size: 1rem;
     padding: 10px;
+  }
+
+  /* パズルピースのトレイの高さを制限 */
+  .puzzle-tray {
+    max-height: 120px !important;
+    padding: 8px !important;
+    gap: 8px !important;
+  }
+  
+  .puzzle-piece {
+    padding: 6px 10px !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* 図鑑のイラストとレイアウトの調整（高さを抑えてスクロール不要にする） */
+  .detail-card {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px !important;
+  }
+  
+  .detail-illustration {
+    max-width: 80px !important;
+    height: 80px !important;
+    margin-top: 0 !important;
+  }
+  
+  .detail-row {
+    flex: 1;
+    min-width: 120px;
+    padding: 8px !important;
   }
 }
 
